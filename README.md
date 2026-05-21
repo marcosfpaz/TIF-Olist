@@ -139,7 +139,7 @@ TIF-Olist/
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/<usuario>/TIF-Olist.git
+git clone https://github.com/marcosfpaz/TIF-Olist.git
 cd TIF-Olist
 ```
 
