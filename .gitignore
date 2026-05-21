@@ -1,0 +1,71 @@
+# ============================================================
+# .gitignore — Proyecto TIF Olist
+# ============================================================
+
+# === Datos ===
+# Los CSV crudos NO se versionan (son pesados y públicos en Kaggle)
+data/raw/*.csv
+data/processed/*.csv
+data/final/*.csv
+data/**/*.parquet
+data/**/*.db
+data/**/*.sqlite
+
+# Mantener la estructura de carpetas vacías
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/final/.gitkeep
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# === Entornos virtuales ===
+venv/
+env/
+ENV/
+.venv/
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+
+# === IDE / Editores ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Power BI ===
+# Mantener .pbix pero ignorar caches y archivos temporales
+dashboard/*.pbix.tmp
+dashboard/cache/
+
+# === Informe ===
+# Ignorar archivos temporales de Word
+informe/~$*.docx
+informe/~$*.pptx
+informe/*.tmp
+
+# === Logs y outputs temporales ===
+*.log
+*.out
+output/
+temp/
+tmp/
+
+# === Configuración local ===
+.env
+config_local.py
+credentials.json
