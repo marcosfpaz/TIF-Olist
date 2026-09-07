@@ -1,51 +1,62 @@
 # 📊 Análisis del Comportamiento del Consumidor en E-Commerce
 
-### Trabajo Integrador Final — Diplomatura Universitaria en Ciencia de Datos
-**Universidad Católica de Santiago del Estero (UCSE)** · Facultad de Ciencia, Innovación y Diseño
+**Segmentación de clientes, predicción de insatisfacción y análisis logístico sobre 100.000 órdenes reales del marketplace brasileño Olist.**
+
+`Python` · `SQL` · `scikit-learn` · `FastAPI` · `Power BI`
+
+---
+
+## 🚧 Estado del proyecto
+
+> **Repositorio público desde el día 1, en construcción abierta.**
+> Arrancó el 7 de septiembre de 2026 y se desarrolla en 6 sprints hasta diciembre. Cada sprint deja algo ejecutable en `main`, no una promesa: si un sprint no cierra, se recorta el alcance y se mantiene la fecha.
+
+| Sprint | Entregable | Fecha objetivo | Estado |
+|---|---|---|---|
+| **S0** | Dataset cargado en DuckDB/SQLite (9 tablas) + `01_carga_sql.ipynb` con 5 consultas | 14-sep-2026 | 🟡 En curso |
+| **S1** | Limpieza + `02_eda.ipynb` — 10 gráficos, cada uno con su lectura | 05-oct-2026 | ⚪ Pendiente |
+| **S2** | `03_segmentacion.ipynb` — variables RFM + K-Means (elbow y silhouette) | 26-oct-2026 | ⚪ Pendiente |
+| **S3** | `04_insatisfaccion.ipynb` — clasificador de reseñas + `api/` FastAPI + `Dockerfile` | 16-nov-2026 | ⚪ Pendiente |
+| **S4** | Dashboard en Power BI + documento del informe | 07-dic-2026 | ⚪ Pendiente |
+| **S5** | README final con resultados, `requirements.txt` congelado, test mínimo | 19-dic-2026 | ⚪ Pendiente |
+
+**Hoy el repositorio contiene solo el andamiaje** — estructura, dependencias y este plan. El primer notebook llega con S0.
 
 ---
 
 ## 📌 Resumen
 
-Proyecto de Ciencia de Datos sobre el dataset público de **Olist**, el marketplace de e-commerce más grande de Brasil. El trabajo integra técnicas de obtención, limpieza, análisis, modelado y visualización de datos para responder a una pregunta de negocio real: **¿qué patrones de comportamiento permiten segmentar a los clientes de un marketplace y cómo se relacionan con la satisfacción y el valor generado para el negocio?**
+Proyecto de Ciencia de Datos sobre el dataset público de **Olist**, el marketplace de e-commerce más grande de Brasil. Integra obtención, limpieza, análisis, modelado y despliegue de datos para responder una pregunta de negocio concreta.
 
-El proyecto se materializa en un dashboard interactivo de **Power BI** que sintetiza los hallazgos y permite la toma de decisiones basada en datos.
-
----
-
-## 🎯 Pregunta de investigación
-
-> ¿Qué patrones de comportamiento permiten segmentar a los clientes de un marketplace de e-commerce, y cómo esos segmentos —junto con factores logísticos y de satisfacción— se relacionan con el valor generado para el negocio?
+> **¿Qué patrones de comportamiento permiten segmentar a los clientes de un marketplace de e-commerce, y cómo esos segmentos —junto con factores logísticos y de satisfacción— se relacionan con el valor generado para el negocio?**
 
 ---
 
-## 🎓 Objetivos
+## 🎯 Objetivos
 
-### Objetivo general
-Aplicar técnicas de ciencia de datos sobre datos transaccionales reales de e-commerce para generar insights accionables sobre comportamiento de clientes, performance logística y satisfacción del consumidor.
+Aplicar técnicas de ciencia de datos sobre datos transaccionales reales para generar insights accionables sobre comportamiento de clientes, performance logística y satisfacción del consumidor.
 
-### Objetivos específicos
 1. Integrar y limpiar las 9 tablas relacionales del dataset Olist
-2. Realizar un análisis exploratorio profundo (EDA) sobre ventas, geografía, categorías y reseñas
-3. Construir variables RFM (Recencia, Frecuencia, Monetario) por cliente
+2. Análisis exploratorio sobre ventas, geografía, categorías y reseñas
+3. Construir variables **RFM** (Recencia, Frecuencia, Monetario) por cliente
 4. Segmentar clientes mediante clustering no supervisado (K-Means)
 5. Modelar los factores que predicen la insatisfacción del cliente
 6. Analizar la relación entre tiempos de entrega y calificaciones
-7. Diseñar un dashboard interactivo con los hallazgos clave
-8. Proponer decisiones de negocio fundamentadas en los datos
+7. Exponer el modelo tras una API y contenerizarlo
+8. Sintetizar los hallazgos en un dashboard interactivo
 
 ---
 
 ## 📂 Dataset
 
 **Brazilian E-Commerce Public Dataset by Olist**
+
 - **Fuente:** [Kaggle — olistbr/brazilian-ecommerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-- **Volumen:** ~100.000 órdenes reales
-- **Período:** Septiembre 2016 — Octubre 2018
-- **Cobertura geográfica:** Brasil (todos los estados)
+- **Volumen:** ~100.000 órdenes reales · **Período:** sep-2016 → oct-2018
+- **Cobertura:** Brasil, todos los estados
 - **Licencia:** CC BY-NC-SA 4.0
 
-### Tablas que componen el dataset
+Los CSV **no se versionan** (ver `.gitignore`): se descargan de Kaggle a `data/raw/`.
 
 | Tabla | Descripción |
 |---|---|
@@ -54,79 +65,70 @@ Aplicar técnicas de ciencia de datos sobre datos transaccionales reales de e-co
 | `olist_order_items_dataset` | Items por orden, precios y flete |
 | `olist_order_payments_dataset` | Métodos y cuotas de pago |
 | `olist_order_reviews_dataset` | Calificaciones (1-5) y comentarios |
-| `olist_products_dataset` | Categoría, peso y dimensiones de productos |
+| `olist_products_dataset` | Categoría, peso y dimensiones |
 | `olist_sellers_dataset` | Vendedores y ubicación |
-| `olist_geolocation_dataset` | Coordenadas geográficas por código postal |
+| `olist_geolocation_dataset` | Coordenadas por código postal |
 | `product_category_name_translation` | Traducción de categorías al inglés |
 
 ---
 
 ## 🔬 Metodología
 
-El proyecto sigue la metodología **CRISP-DM** (Cross-Industry Standard Process for Data Mining):
+**CRISP-DM** (Cross-Industry Standard Process for Data Mining):
 
-1. **Comprensión del negocio** — definición del problema y la pregunta de investigación
-2. **Comprensión de los datos** — EDA inicial, perfilado y diagrama relacional
-3. **Preparación de los datos** — limpieza, integración y feature engineering
-4. **Modelado** — segmentación (K-Means) y clasificación (Random Forest / Regresión Logística)
-5. **Evaluación** — métricas (silhouette, accuracy, F1, AUC) e interpretación
-6. **Despliegue** — dashboard final en Power BI y conclusiones de negocio
+1. **Comprensión del negocio** — problema y pregunta de investigación
+2. **Comprensión de los datos** — EDA inicial, perfilado, diagrama relacional
+3. **Preparación** — limpieza, integración y feature engineering
+4. **Modelado** — segmentación (K-Means) y clasificación supervisada
+5. **Evaluación** — silhouette, accuracy, F1, AUC e interpretación
+6. **Despliegue** — API, dashboard y conclusiones de negocio
 
----
+### Ejes analíticos
 
-## 🧠 Ejes analíticos
-
-| Eje | Pregunta de negocio | Técnica aplicada |
+| Eje | Pregunta de negocio | Técnica |
 |---|---|---|
-| **1. Segmentación de clientes** | ¿Qué tipos de clientes existen en la plataforma? | RFM + K-Means + PCA |
-| **2. Satisfacción y logística** | ¿Qué factores predicen una mala reseña? | Clasificación supervisada |
-| **3. Análisis de mercado** | ¿Qué categorías y regiones generan más valor? | EDA geográfico + series de tiempo |
+| **Segmentación** | ¿Qué tipos de clientes existen en la plataforma? | RFM + K-Means + PCA |
+| **Satisfacción y logística** | ¿Qué factores predicen una mala reseña? | Clasificación supervisada |
+| **Análisis de mercado** | ¿Qué categorías y regiones generan más valor? | EDA geográfico + series de tiempo |
 
 ---
 
-## 🛠️ Stack tecnológico
+## 🛠️ Stack
 
 | Categoría | Herramientas |
 |---|---|
 | Lenguaje | Python 3.10+ |
-| Manipulación de datos | pandas, numpy |
-| Visualización | matplotlib, seaborn, plotly |
-| Base de datos | SQLite + SQL |
-| Machine Learning | scikit-learn, mlxtend |
+| Datos | pandas · numpy |
+| Base de datos | DuckDB / SQLite + SQL |
+| Visualización | matplotlib · seaborn · plotly |
+| Machine Learning | scikit-learn · mlxtend |
+| API y despliegue | FastAPI · Docker |
 | Dashboard | Power BI Desktop |
 | Entorno | Jupyter Notebook |
-| Control de versiones | Git + GitHub |
 
 ---
 
-## 📁 Estructura del repositorio
+## 📁 Estructura
 
 ```
 TIF-Olist/
 │
 ├── data/
-│   ├── raw/                    # CSVs originales del dataset (no versionados)
-│   ├── processed/              # Datasets intermedios limpios
-│   └── final/                  # Tablón consolidado para modelado
+│   ├── raw/                      # CSVs de Kaggle (no versionados)
+│   ├── processed/                # Datasets intermedios limpios
+│   └── final/                    # Tablón consolidado para modelado
 │
 ├── notebooks/
-│   ├── 01_EDA_inicial.ipynb           # Exploración por tabla y calidad de datos
-│   ├── 02_limpieza_integracion.ipynb  # Limpieza y construcción del tablón único
-│   ├── 03_EDA_avanzado.ipynb          # Storytelling y hallazgos
-│   ├── 04_segmentacion_RFM.ipynb      # Clustering de clientes
-│   ├── 05_modelo_satisfaccion.ipynb   # Clasificación de reseñas
-│   └── 06_analisis_geografico.ipynb   # Mapas y series temporales
+│   ├── 01_carga_sql.ipynb        # S0 · Carga en DuckDB + consultas SQL
+│   ├── 02_eda.ipynb              # S1 · Limpieza y análisis exploratorio
+│   ├── 03_segmentacion.ipynb     # S2 · RFM + K-Means
+│   └── 04_insatisfaccion.ipynb   # S3 · Clasificador de reseñas
 │
-├── sql/
-│   └── consultas_exploratorias.sql    # Queries SQL sobre el modelo relacional
+├── api/                          # S3 · FastAPI que expone el modelo
+│   └── Dockerfile
 │
-├── dashboard/
-│   └── Olist_Dashboard.pbix           # Dashboard final en Power BI
-│
-├── informe/
-│   ├── informe_final.docx             # Documento académico final
-│   ├── presentacion_defensa.pptx      # Slides para la defensa
-│   └── img/                           # Gráficos y figuras
+├── dashboard/                    # S4 · Power BI
+├── informe/                      # S4 · Documento y figuras
 │
 ├── .gitignore
 ├── README.md
@@ -135,83 +137,48 @@ TIF-Olist/
 
 ---
 
-## 🚀 Instalación y ejecución
+## 🚀 Instalación
 
-### 1. Clonar el repositorio
 ```bash
+# 1. Clonar
 git clone https://github.com/marcosfpaz/TIF-Olist.git
 cd TIF-Olist
-```
 
-### 2. Crear entorno virtual (recomendado)
-```bash
+# 2. Entorno virtual
 python -m venv venv
-source venv/bin/activate          # Linux / Mac
+source venv/bin/activate          # Linux / macOS
 venv\Scripts\activate             # Windows
-```
 
-### 3. Instalar dependencias
-```bash
+# 3. Dependencias
 pip install -r requirements.txt
-```
 
-### 4. Descargar el dataset
-- Descargar desde [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-- Descomprimir los CSV en la carpeta `data/raw/`
+# 4. Dataset
+# Descargar de Kaggle y descomprimir los CSV en data/raw/
 
-### 5. Ejecutar los notebooks
-```bash
+# 5. Notebooks
 jupyter notebook
 ```
-Ejecutar los notebooks en orden numérico, del `01` al `06`.
 
-### 6. Abrir el dashboard
-Abrir `dashboard/Olist_Dashboard.pbix` con **Power BI Desktop**.
+Ejecutar los notebooks en orden numérico.
 
 ---
 
-## 📅 Cronograma de desarrollo
+## 📈 Hallazgos
 
-| Semana | Etapa | Estado |
-|---|---|---|
-| 1 | Setup, descarga y EDA inicial | 🟢 En curso |
-| 2 | Limpieza e integración de tablas | ⚪ Pendiente |
-| 3 | EDA avanzado y storytelling | ⚪ Pendiente |
-| 4 | Feature engineering RFM | ⚪ Pendiente |
-| 5 | Modelado de segmentación (K-Means) | ⚪ Pendiente |
-| 6 | Modelado de satisfacción | ⚪ Pendiente |
-| 7 | Dashboard en Power BI | ⚪ Pendiente |
-| 8 | Informe final y preparación de defensa | ⚪ Pendiente |
-
----
-
-## 📈 Principales hallazgos
-
-*Esta sección se completará a medida que avance el proyecto.*
-
----
-
-## 📚 Bibliografía consultada
-
-- Dangeti, P., & Eswara, N. J. (2019). *Introducción a la estadística para la ciencia de datos*. Editorial Montesco.
-- Montenegro, Á. (2019). *Aprendizaje automático*. Editorial HWK.
-- Domínguez, E. M. (2015). *Data Science: Introducción*. Editorial Océano.
-- Caballero, S. G. (2020). *Big Data y Business Intelligence*. Editorial Prints.
-- Fernández de Larrea, C., & Martínez Rubio, E. (2021). *Data Science para la toma de decisiones empresariales*. McGraw-Hill.
-- Provost, F., & Fawcett, T. (2013). *Data Science for Business*. O'Reilly Media.
+*Se completa a medida que cierran los sprints. Vacío es vacío: acá no va nada hasta que haya un número detrás.*
 
 ---
 
 ## 👤 Autor
 
 **Ing. Marcos F. Paz**
-Cursante de la Diplomatura Universitaria en Ciencia de Datos — UCSE
-Tucumán, Argentina · 2026
+Ingeniero Electrónico · Ciencia de Datos y Machine Learning
+Tucumán, Argentina
 
-**Docente a cargo:** Prof. Lilia Palomo
+Desarrollado en el marco de la Diplomatura Universitaria en Ciencia de Datos (UCSE).
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto se desarrolla con fines exclusivamente académicos en el marco del Trabajo Integrador Final de la Diplomatura Universitaria en Ciencia de Datos de la UCSE. El dataset utilizado se encuentra bajo licencia Creative Commons (CC BY-NC-SA 4.0).
+Proyecto académico y de portafolio. El dataset utilizado está bajo licencia **CC BY-NC-SA 4.0** (Creative Commons Atribución-NoComercial-CompartirIgual).
