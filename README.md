@@ -13,14 +13,15 @@
 
 | Sprint | Entregable | Fecha objetivo | Estado |
 |---|---|---|---|
-| **S0** | Dataset cargado en DuckDB/SQLite (9 tablas) + `01_carga_sql.ipynb` con 5 consultas | 14-sep-2026 | 🟡 En curso |
-| **S1** | Limpieza + `02_eda.ipynb` — 10 gráficos, cada uno con su lectura | 05-oct-2026 | ⚪ Pendiente |
+| **S0** | Dataset cargado en DuckDB (9 tablas) + `01_carga_sql.ipynb` con 5 consultas | 14-sep-2026 | ✅ Hecho |
+| **S1** | Limpieza + `02_eda.ipynb` — 10 gráficos, cada uno con su lectura | 05-oct-2026 | 🟡 En curso |
 | **S2** | `03_segmentacion.ipynb` — variables RFM + K-Means (elbow y silhouette) | 26-oct-2026 | ⚪ Pendiente |
 | **S3** | `04_insatisfaccion.ipynb` — clasificador de reseñas + `api/` FastAPI + `Dockerfile` | 16-nov-2026 | ⚪ Pendiente |
 | **S4** | Dashboard en Power BI + documento del informe | 07-dic-2026 | ⚪ Pendiente |
 | **S5** | README final con resultados, `requirements.txt` congelado, test mínimo | 19-dic-2026 | ⚪ Pendiente |
 
-**Hoy el repositorio contiene solo el andamiaje** — estructura, dependencias y este plan. El primer notebook llega con S0.
+**Reproducirlo:** bajar el [dataset de Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) a `data/raw/`,
+`pip install -r requirements.txt` y correr `notebooks/01_carga_sql.ipynb`. Los CSV no se versionan; la base se regenera sola.
 
 ---
 
@@ -166,6 +167,15 @@ Ejecutar los notebooks en orden numérico.
 ## 📈 Hallazgos
 
 *Se completa a medida que cierran los sprints. Vacío es vacío: acá no va nada hasta que haya un número detrás.*
+
+**S0 — La entrega tardía es el mejor predictor de una mala reseña.** Sobre 99.224 reseñas de
+órdenes entregadas, el **37,8 %** de las de 1 estrella llegaron después de la fecha prometida,
+contra el **3,0 %** de las de 5 estrellas. El tiempo medio de entrega acompaña: 21,3 días para
+1 estrella, 10,6 para 5. Es la hipótesis que el clasificador del S3 tiene que batir.
+
+**S0 — El negocio es casi enteramente de compra única.** De 94.989 clientes únicos, solo el
+**3,0 %** compró más de una vez. Cualquier segmentación RFM va a estar dominada por recencia y
+monto, no por frecuencia — hay que tenerlo en cuenta antes de correr el K-Means del S2.
 
 ---
 

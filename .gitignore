@@ -69,3 +69,6 @@ tmp/
 .env
 config_local.py
 credentials.json
+
+# === Contexto local para Claude Code (personal, no va al repo público) ===
+CLAUDE.md
